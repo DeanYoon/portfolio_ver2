@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
-import Topic from "./Topic";
-import { maxWidthValue } from "../config";
+import Topic from "../Topic";
+import { maxWidthValue } from "../../config";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
   max-width: ${maxWidthValue};
-  min-width: 400px;
+  min-width: 300px;
   width: 100%;
   height: 1000px;
   border-radius: 30px;
@@ -19,7 +19,7 @@ const Main = styled.div``;
 const Bottom = styled.div``;
 const ColorButton = styled.div``;
 
-function HeadBox() {
+function Top() {
   return (
     <Wrapper>
       <Topic />
@@ -30,4 +30,4 @@ function HeadBox() {
   );
 }
 
-export default HeadBox;
+export default Top;

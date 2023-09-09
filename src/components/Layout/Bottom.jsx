@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { maxWidthValue } from "../config";
+import { maxWidthValue } from "../../config";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;

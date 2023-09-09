@@ -2,3 +2,6 @@ html {
   background-color: #433e3c;
   padding: 100px 30px;
 }
+* {
+  box-sizing: border-box;
+}

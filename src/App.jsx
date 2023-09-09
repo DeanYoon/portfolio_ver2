@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
-import HeadBox from "./components/HeadBox";
 import "./App.css";
-import Main from "./components/Main";
-import Bottom from "./components/Bottom";
+import Main from "./components/Layout/Main";
+import Bottom from "./components/Layout/Bottom";
+import Top from "./components/Layout/Top";
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 function App() {
   return (
     <Wrapper className="App">
-      <HeadBox />
+      <Top />
       <Main />
       <Bottom />
     </Wrapper>
