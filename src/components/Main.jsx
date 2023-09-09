@@ -7,6 +7,7 @@ const row_increment = "10px";
 
 const Wrapper = styled.div`
   max-width: ${maxWidthValue};
+  width: 100%;
   margin: 40px 0;
 
   columns: ${(props) => props.widthColumn};
@@ -16,11 +17,11 @@ const Card = styled.div`
   background-color: white;
   border: 1px solid black;
   break-inside: avoid;
-  min-width: 400px;
+  max-width: 200px;
   height: 500px;
-  margin: 0px 20px 40px 20px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   border-radius: 30px;
+  margin-bottom: 30px;
   cursor: pointer;
   &:hover {
     transform: scale(1.03);
@@ -58,12 +59,12 @@ function Main() {
     <Wrapper widthColumn={widthColumn}>
       <Card />
       <Card3 />
-      <Card2 />
+      {/* <Card2 />
       <Card2 />
       <Card3 />
       <Card />
       <Card />
-      <Card2 />
+      <Card2 /> */}
       <Card />
     </Wrapper>
   );
