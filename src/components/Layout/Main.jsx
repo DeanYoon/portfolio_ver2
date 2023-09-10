@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 // import { maxWidthValue } from "../../config";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import Content1 from "../Cards/Content1";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -23,23 +24,20 @@ export const Card = styled.div`
   margin-bottom: 30px;
   break-inside: avoid;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transform: ${({ isVisible, isScrollingDown }) => {
-    if (isScrollingDown) {
-      return isVisible ? "rotateX(0deg)" : "rotateX(-10deg)";
-    } else {
-      return isVisible ? "rotateX(0deg)" : "rotateX(10deg)";
-    }
+  transform: ${({ isVisible }) => {
+    return !isVisible ? "rotateX(10deg) scale(0.9)" : "rotateX(0deg) ";
   }};
 
   background-color: white;
   height: 500px;
-  transition: opacity 1s ease-in-out, transform 0.8s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
   border-radius: 30px;
 
   cursor: pointer;
 
   &:hover {
-    /* transition: transform 1s; You can add transition here if needed */
+    /* transition: transform 0.5s; */
+    /* transform: scale(1.03); */
   }
 `;
 const Card2 = styled(Card)`
@@ -60,11 +58,9 @@ const Card4 = styled(Card)`
 
 function Main() {
   const [widthColumn, setWidthColumn] = useState(2);
-  const prevScrollY = useRef(0);
-  const prevScrollX = useRef(0);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isScrollingLeft, setIsScrollingLeft] = useState(false);
-  const { ref: card1Ref, inView: card1IsVisible, entry } = useInView();
+  const { ref: card1Ref, inView: card1IsVisible } = useInView();
   const { ref: card2Ref, inView: card2IsVisible } = useInView();
   const { ref: card3Ref, inView: card3IsVisible } = useInView();
   const { ref: card4Ref, inView: card4IsVisible } = useInView();
@@ -86,25 +82,19 @@ function Main() {
     }
   };
 
+  // resize
   useEffect(() => {
     updateColumnNumber(); // Initial call to set the column number
     window.addEventListener("resize", updateColumnNumber);
 
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      const isScrollingDownCheck = currentScrollY > prevScrollY.current;
-
-      setIsScrollingDown(isScrollingDownCheck);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("resize", updateColumnNumber);
-      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // useEffect(() => {
+  //   console.log(isScrollingDown);
+  // }, [isScrollingDown]);
 
   return (
     <Wrapper widthColumn={widthColumn}>
@@ -112,7 +102,9 @@ function Main() {
         isVisible={card1IsVisible}
         isScrollingDown={isScrollingDown}
         ref={card1Ref}
-      ></Card>
+      >
+        <Content1 />
+      </Card>
       <Card3
         isVisible={card2IsVisible}
         isScrollingDown={isScrollingDown}
