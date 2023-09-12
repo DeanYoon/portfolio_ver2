@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Card = styled.div`
+export const Card = styled(motion.div)`
   width: 100%;
-
+  position: relative;
   margin-bottom: 30px;
   break-inside: avoid;
 
