@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Content1 from "../Cards/Content1";
+import { Card } from "../Cards/config";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -17,29 +18,6 @@ const Wrapper = styled.div`
   perspective: 800px;
 `;
 
-export const Card = styled.div`
-  font-size: 100px;
-  width: 100%;
-
-  margin-bottom: 30px;
-  break-inside: avoid;
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transform: ${({ isVisible }) => {
-    return !isVisible ? "rotateX(10deg) scale(0.9)" : "rotateX(0deg) ";
-  }};
-
-  background-color: white;
-  height: 500px;
-  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
-  border-radius: 30px;
-
-  cursor: pointer;
-
-  &:hover {
-    /* transition: transform 0.5s; */
-    /* transform: scale(1.03); */
-  }
-`;
 const Card2 = styled(Card)`
   height: 200px;
   background-color: red;
@@ -125,7 +103,10 @@ function Main() {
         isVisible={card6IsVisible}
         isScrollingDown={isScrollingDown}
         ref={card6Ref}
-      ></Card>
+      >
+        {" "}
+        <Content1 />
+      </Card>
       <Card4
         isVisible={card7IsVisible}
         isScrollingDown={isScrollingDown}

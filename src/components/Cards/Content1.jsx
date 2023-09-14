@@ -2,23 +2,40 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Card } from "./config";
 import { motion, useSpring, wrap } from "framer-motion";
-import useMouse from "@react-hook/mouse-position";
+import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
+import axios from "axios";
+
+const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const Wrapper = styled(Card)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  font-size: 1500px;
+  font-size: 30px;
+  background-color: #515151;
+  color: white;
 `;
+const WeatherInfo = styled.div`
+  z-index: 999;
+  text-align: center;
+`;
+const WeatherIcon = styled.img``;
+const Location = styled.div``;
+const Weather = styled.div``;
+
 const Circle = styled(motion.div)`
   position: absolute;
   width: ${(props) => props.size}px; // Use the size prop to set the width
   height: ${(props) => props.size}px; // Use the size prop to set the height
   border-radius: 50%;
-  background-color: #9bf50b;
+  background-color: #838a93;
+  filter: blur(70px);
 `;
 
 function Content1() {
-  const circleSize = 100; // Define the size of the circle
+  const circleSize = 250; // Define the size of the circle
   const halfCircle = circleSize / 2;
   const [circlePosition, setCirclePosition] = useState({
     x: halfCircle,
@@ -29,7 +46,9 @@ function Content1() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [mouseEntered, setMouseEntered] = useState(false);
   const constraintsRef = useRef(null);
-
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
+  const [weatherObj, setWeatherObj] = useState({});
   const updateCirclePosition = (e) => {
     const mouseX = e.clientX - wrapperPosition.left - halfCircle;
     const mouseY = e.clientY - wrapperPosition.top - halfCircle;
@@ -45,8 +64,8 @@ function Content1() {
 
   useEffect(() => {
     const rect = constraintsRef.current.getBoundingClientRect();
-    const initialX = rect.width / 2 - halfCircle;
-    const initialY = rect.height / 2 - halfCircle;
+    const initialX = rect.width / 2 - circleSize;
+    const initialY = rect.height / 2 - circleSize;
 
     setCirclePosition({ x: initialX, y: initialY });
     setWrapperPosition({ left: rect.left, top: rect.top });
@@ -54,12 +73,43 @@ function Content1() {
       document.addEventListener("mousemove", updateCirclePosition);
     window.addEventListener("scroll", updateScrollY);
     window.addEventListener("resize", updateWindowWidth);
+
     return () => {
       document.removeEventListener("mousemove", updateCirclePosition);
       window.removeEventListener("scroll", updateScrollY);
       window.removeEventListener("resize", updateWindowWidth);
     };
   }, [windowWidth, mouseEntered, scrollY]);
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+      });
+    } else {
+      console.log("Geolocation is not available in this browser.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (lat !== null && lon !== null) {
+      // Use lat and lon to make your API request
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+        )
+        .then((response) => {
+          setWeatherObj(response.data.weather[0]);
+          console.log(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+          );
+          // You can update the WeatherInfo, WeatherIcon, Location, and Weather state here
+        })
+        .catch((error) => {
+          console.error("Error fetching weather data:", error);
+        });
+    }
+  }, [lat, lon]);
 
   const handleMouseEnter = () => {
     setMouseEntered(true);
@@ -79,7 +129,14 @@ function Content1() {
         size={circleSize}
         animate={{ x: circlePosition.x, y: circlePosition.y }}
         transition={{ type: "spring", stiffness: 500, damping: 100 }} // Adjust these values for desired animation
-      />{" "}
+      />
+      <WeatherInfo>
+        <WeatherIcon
+          src={` https://openweathermap.org/img/wn/${weatherObj.icon}@2x.png`}
+        />
+        <Location>Korea, Seoul</Location>
+        <Weather>{weatherObj.main}</Weather>
+      </WeatherInfo>
     </Wrapper>
   );
 }

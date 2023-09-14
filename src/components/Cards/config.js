@@ -2,15 +2,13 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 export const Card = styled(motion.div)`
-  width: 100%;
   position: relative;
   margin-bottom: 30px;
   break-inside: avoid;
-
-  background-color: white;
   height: 500px;
   transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
   border-radius: 30px;
+  background-color: white;
 
   cursor: pointer;
   /* 
