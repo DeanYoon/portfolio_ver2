@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Card } from "./config";
-import { motion, useSpring, wrap } from "framer-motion";
-import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -23,7 +22,7 @@ const WeatherInfo = styled.div`
 `;
 const WeatherIcon = styled.img``;
 const Location = styled.div``;
-const Weather = styled.div``;
+const WeatherDetail = styled.div``;
 
 const Circle = styled(motion.div)`
   position: absolute;
@@ -34,7 +33,7 @@ const Circle = styled(motion.div)`
   filter: blur(70px);
 `;
 
-function Content1() {
+function Weather() {
   const circleSize = 250; // Define the size of the circle
   const halfCircle = circleSize / 2;
   const [circlePosition, setCirclePosition] = useState({
@@ -49,6 +48,7 @@ function Content1() {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   const [weatherObj, setWeatherObj] = useState({});
+  const [temp, setTemp] = useState();
   const updateCirclePosition = (e) => {
     const mouseX = e.clientX - wrapperPosition.left - halfCircle;
     const mouseY = e.clientY - wrapperPosition.top - halfCircle;
@@ -100,9 +100,7 @@ function Content1() {
         )
         .then((response) => {
           setWeatherObj(response.data.weather[0]);
-          console.log(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
-          );
+          setTemp(`${Math.floor(response.data.main.temp - 273.15)}'C`);
           // You can update the WeatherInfo, WeatherIcon, Location, and Weather state here
         })
         .catch((error) => {
@@ -131,14 +129,17 @@ function Content1() {
         transition={{ type: "spring", stiffness: 500, damping: 100 }} // Adjust these values for desired animation
       />
       <WeatherInfo>
-        <WeatherIcon
-          src={` https://openweathermap.org/img/wn/${weatherObj.icon}@2x.png`}
-        />
+        {weatherObj.icon && (
+          <WeatherIcon
+            src={`https://openweathermap.org/img/wn/${weatherObj.icon}@2x.png`}
+          />
+        )}
         <Location>Korea, Seoul</Location>
-        <Weather>{weatherObj.main}</Weather>
+        <WeatherDetail>{weatherObj.main}</WeatherDetail>
+        <WeatherDetail>{temp}</WeatherDetail>
       </WeatherInfo>
     </Wrapper>
   );
 }
 
-export default Content1;
+export default Weather;
