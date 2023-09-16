@@ -6,7 +6,14 @@ import axios from "axios";
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
-const Wrapper = styled(Card)`
+const Wrapper = styled(motion.div)`
+  position: relative;
+  margin-bottom: 30px;
+  break-inside: avoid;
+  height: 500px;
+  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  border-radius: 30px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;

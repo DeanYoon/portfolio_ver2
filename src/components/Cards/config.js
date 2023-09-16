@@ -1,19 +1,22 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Card = styled(motion.div)`
-  position: relative;
+export const CardStyle = styled.div`
+  font-size: 100px;
+  width: 100%;
   margin-bottom: 30px;
   break-inside: avoid;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  transform: ${({ isVisible }) => {
+    return !isVisible ? "rotateX(10deg) scale(0.9)" : "rotateX(0deg) ";
+  }};
   height: 500px;
-  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 30px;
-  background-color: white;
 
   cursor: pointer;
-  /* 
   &:hover {
     transition: transform 0.5s;
     transform: scale(1.03);
-  } */
+  }
 `;

@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Weather from "../Cards/Weather";
-import { Card } from "../Cards/config";
+import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
 
 // const columnWidth = "250px";
@@ -19,16 +19,21 @@ const Wrapper = styled.div`
   perspective: 800px;
 `;
 
-const Card2 = styled(Card)`
+const Card = styled(CardStyle)``;
+const Card1 = styled(CardStyle)`
+  background-color: white;
+`;
+
+const Card2 = styled(CardStyle)`
   height: 200px;
   background-color: red;
 `;
-const Card3 = styled(Card)`
+const Card3 = styled(CardStyle)`
   height: 600px;
   background-color: yellow;
 `;
 
-const Card4 = styled(Card)`
+const Card4 = styled(CardStyle)`
   height: 400px;
   background-color: greenyellow;
 `;
@@ -78,15 +83,15 @@ function Main() {
       <Card2 isVisible={card3IsVisible} ref={card3Ref}></Card2>
 
       <Card3 isVisible={card5IsVisible} ref={card5Ref}></Card3>
-      <Card isVisible={card6IsVisible} ref={card6Ref}>
+      <Card1 isVisible={card6IsVisible} ref={card6Ref}>
         {" "}
         <Weather />
-      </Card>
+      </Card1>
       <Card4 isVisible={card7IsVisible} ref={card7Ref}></Card4>
       <Card2 isVisible={card8IsVisible} ref={card8Ref}></Card2>
-      <Card isVisible={card9IsVisible} ref={card9Ref}></Card>
+      <Card1 isVisible={card9IsVisible} ref={card9Ref}></Card1>
       <Card2 isVisible={card4IsVisible} ref={card4Ref}></Card2>
-      <Card isVisible={card10IsVisible} ref={card10Ref}></Card>
+      <Card1 isVisible={card10IsVisible} ref={card10Ref}></Card1>
       <Card3 isVisible={card11IsVisible} ref={card11Ref}></Card3>
     </Wrapper>
   );
