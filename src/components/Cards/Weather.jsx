@@ -9,7 +9,8 @@ const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 const Wrapper = styled(motion.div)`
   position: relative;
   height: 500px;
-  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 0.5s ease-in-out,
+    background-color 1s ease-in-out;
   border-radius: 30px;
   cursor: pointer;
   display: flex;
@@ -20,17 +21,7 @@ const Wrapper = styled(motion.div)`
   font-size: 30px;
   background-color: ${(props) => (props.isMouseEnter ? "#6d7279" : "#515151")};
   color: white;
-  &:hover {
-    transition: all 0.3s ease-in-out;
-  }
 `;
-const WeatherInfo = styled.div`
-  z-index: 999;
-  text-align: center;
-`;
-const WeatherIcon = styled.img``;
-const Location = styled.div``;
-const WeatherDetail = styled.div``;
 
 const Circle = styled(motion.div)`
   position: absolute;
@@ -38,8 +29,17 @@ const Circle = styled(motion.div)`
   height: ${(props) => props.size}px; // Use the size prop to set the height
   border-radius: 50%;
   background-color: ${(props) => (!props.isMouseEnter ? "#838a93" : "#515151")};
-  filter: blur(70px);
+  filter: blur(30px);
+  transition: background-color 0.5s ease-out;
 `;
+
+const WeatherInfo = styled.div`
+  z-index: 999;
+  text-align: center;
+`;
+const WeatherIcon = styled.img``;
+const Location = styled.div``;
+const WeatherDetail = styled.div``;
 
 function Weather() {
   const circleSize = 200; // Define the size of the circle
