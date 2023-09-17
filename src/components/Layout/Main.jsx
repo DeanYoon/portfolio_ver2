@@ -77,19 +77,18 @@ function Main() {
       <Card isVisible={card1IsVisible} ref={card1Ref}>
         <Weather />
       </Card>
-      <Card3 isVisible={card2IsVisible} ref={card2Ref}>
-        <Music />
-      </Card3>
+      <Card3 isVisible={card2IsVisible} ref={card2Ref}></Card3>
       <Card2 isVisible={card3IsVisible} ref={card3Ref}></Card2>
 
       <Card3 isVisible={card5IsVisible} ref={card5Ref}></Card3>
       <Card1 isVisible={card6IsVisible} ref={card6Ref}>
-        {" "}
         <Weather />
       </Card1>
       <Card4 isVisible={card7IsVisible} ref={card7Ref}></Card4>
       <Card2 isVisible={card8IsVisible} ref={card8Ref}></Card2>
-      <Card1 isVisible={card9IsVisible} ref={card9Ref}></Card1>
+      <Card1 isVisible={card9IsVisible} ref={card9Ref}>
+        <Music />
+      </Card1>
       <Card2 isVisible={card4IsVisible} ref={card4Ref}></Card2>
       <Card1 isVisible={card10IsVisible} ref={card10Ref}></Card1>
       <Card3 isVisible={card11IsVisible} ref={card11Ref}></Card3>
