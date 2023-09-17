@@ -8,8 +8,6 @@ const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 const Wrapper = styled(motion.div)`
   position: relative;
-  margin-bottom: 30px;
-  break-inside: avoid;
   height: 500px;
   transition: opacity 1s ease-in-out, transform 0.5s ease-in-out;
   border-radius: 30px;
@@ -20,8 +18,11 @@ const Wrapper = styled(motion.div)`
   position: relative;
   overflow: hidden;
   font-size: 30px;
-  background-color: #515151;
+  background-color: ${(props) => (props.isMouseEnter ? "#6d7279" : "#515151")};
   color: white;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+  }
 `;
 const WeatherInfo = styled.div`
   z-index: 999;
@@ -36,12 +37,12 @@ const Circle = styled(motion.div)`
   width: ${(props) => props.size}px; // Use the size prop to set the width
   height: ${(props) => props.size}px; // Use the size prop to set the height
   border-radius: 50%;
-  background-color: #838a93;
+  background-color: ${(props) => (!props.isMouseEnter ? "#838a93" : "#515151")};
   filter: blur(70px);
 `;
 
 function Weather() {
-  const circleSize = 250; // Define the size of the circle
+  const circleSize = 200; // Define the size of the circle
   const halfCircle = circleSize / 2;
   const [circlePosition, setCirclePosition] = useState({
     x: halfCircle,
@@ -57,8 +58,8 @@ function Weather() {
   const [weatherObj, setWeatherObj] = useState({});
   const [temp, setTemp] = useState();
   const updateCirclePosition = (e) => {
-    const mouseX = e.clientX - wrapperPosition.left - halfCircle;
-    const mouseY = e.clientY - wrapperPosition.top - halfCircle;
+    const mouseX = e.clientX - wrapperPosition.left - circleSize;
+    const mouseY = e.clientY - wrapperPosition.top - circleSize;
     setCirclePosition({ x: mouseX, y: mouseY });
   };
 
@@ -129,11 +130,13 @@ function Weather() {
       ref={constraintsRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      isMouseEnter={mouseEntered}
     >
       <Circle
         size={circleSize}
         animate={{ x: circlePosition.x, y: circlePosition.y }}
         transition={{ type: "spring", stiffness: 500, damping: 100 }} // Adjust these values for desired animation
+        isMouseEnter={mouseEntered}
       />
       <WeatherInfo>
         {weatherObj.icon && (
