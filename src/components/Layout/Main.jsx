@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import Weather from "../Cards/Weather";
 import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
+import News from "../Cards/News";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -21,7 +22,7 @@ const Wrapper = styled.div`
 
 const Card = styled(CardStyle)``;
 const Card1 = styled(CardStyle)`
-  background-color: white;
+  background-color: #f0e7e4;
 `;
 
 const Card2 = styled(CardStyle)`
@@ -82,7 +83,7 @@ function Main() {
 
       <Card3 isVisible={card5IsVisible} ref={card5Ref}></Card3>
       <Card1 isVisible={card6IsVisible} ref={card6Ref}>
-        <Weather />
+        <News />
       </Card1>
       <Card4 isVisible={card7IsVisible} ref={card7Ref}></Card4>
       <Card2 isVisible={card8IsVisible} ref={card8Ref}></Card2>
