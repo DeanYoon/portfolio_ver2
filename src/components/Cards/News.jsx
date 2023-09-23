@@ -29,7 +29,7 @@ function News() {
   const [news, setNews] = useState({});
   const getNews = async () => {
     await axios
-      .get(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${apiKey}`)
+      .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`)
       .then((response) => {
         const filteredNewsList = response.data.articles.filter(
           (article) => article.urlToImage

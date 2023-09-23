@@ -34,7 +34,7 @@ const Circle = styled(motion.div)`
 `;
 
 const WeatherInfo = styled.div`
-  z-index: 999;
+  z-index: 1;
   text-align: center;
 `;
 const WeatherIcon = styled.img``;

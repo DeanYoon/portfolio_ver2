@@ -1,11 +1,11 @@
 import { styled } from "styled-components";
-// import { maxWidthValue } from "../../config";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import Weather from "../Cards/Weather";
 import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
 import News from "../Cards/News";
+import { AnimatePresence, motion } from "framer-motion";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   columns: ${({ widthColumn }) => widthColumn};
   column-gap: 50px;
   perspective: 800px;
+  /* position: relative; */
 `;
 
 const Card = styled(CardStyle)``;
@@ -39,8 +40,22 @@ const Card4 = styled(CardStyle)`
   background-color: greenyellow;
 `;
 
-function Main() {
+const Focused = styled(motion.div)`
+  width: 500px;
+  height: 500px;
+  background-color: tomato;
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+
+function Main({ toggleClick, selectedCardLayoutId }) {
   const [widthColumn, setWidthColumn] = useState(2);
+  const [selectedCard, setSelectedCard] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0); // Add this state
+
+  const wrapperRef = useRef();
+  const mainContentRef = useRef();
 
   const { ref: card1Ref, inView: card1IsVisible } = useInView();
   const { ref: card2Ref, inView: card2IsVisible } = useInView();
@@ -67,32 +82,121 @@ function Main() {
   // resize
   useEffect(() => {
     updateColumnNumber(); // Initial call to set the column number
+    const mainContentElement = mainContentRef.current;
+
+    if (mainContentElement) {
+      if (selectedCardLayoutId) {
+        // Offset the main content to counteract the scroll position
+        mainContentElement.style.transform = `translateY(-${scrollPosition}px)`;
+      } else {
+        mainContentElement.style.transform = "translateY(0)";
+      }
+    }
+
     window.addEventListener("resize", updateColumnNumber);
     return () => {
       window.removeEventListener("resize", updateColumnNumber);
     };
   }, []);
+  // Listen for scroll events and update scrollPosition
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <Wrapper widthColumn={widthColumn}>
-      <Card isVisible={card1IsVisible} ref={card1Ref}>
+    <Wrapper widthColumn={widthColumn} ref={wrapperRef}>
+      <Card
+        isVisible={card1IsVisible}
+        ref={card1Ref}
+        layoutId="card1Ref"
+        selectedCard={selectedCardLayoutId === "card1Ref"}
+      >
         <Weather />
       </Card>
-      <Card3 isVisible={card2IsVisible} ref={card2Ref}></Card3>
-      <Card2 isVisible={card3IsVisible} ref={card3Ref}></Card2>
 
-      <Card3 isVisible={card5IsVisible} ref={card5Ref}></Card3>
-      <Card1 isVisible={card6IsVisible} ref={card6Ref}>
+      <Card3
+        isVisible={card2IsVisible}
+        ref={card2Ref}
+        layoutId="card2Ref"
+        selectedCard={selectedCardLayoutId === "card2Ref"}
+        onClick={() => toggleClick("card2Ref")}
+      >
+        {`${selectedCard}`}
+      </Card3>
+
+      <Card2
+        isVisible={card3IsVisible}
+        ref={card3Ref}
+        layoutId="card3Ref"
+        selectedCard={selectedCardLayoutId === "card3Ref"}
+        onClick={() => toggleClick("card3Ref")}
+      ></Card2>
+
+      <Card3
+        isVisible={card5IsVisible}
+        ref={card5Ref}
+        layoutId="card5Ref"
+        selectedCard={selectedCardLayoutId === "card5Ref"}
+        onClick={() => toggleClick("card5Ref")}
+      ></Card3>
+      <Card1
+        isVisible={card6IsVisible}
+        ref={card6Ref}
+        layoutId="card6Ref"
+        selectedCard={selectedCardLayoutId === "card6Ref"}
+      >
         <News />
       </Card1>
-      <Card4 isVisible={card7IsVisible} ref={card7Ref}></Card4>
-      <Card2 isVisible={card8IsVisible} ref={card8Ref}></Card2>
-      <Card1 isVisible={card9IsVisible} ref={card9Ref}>
+      <Card4
+        isVisible={card7IsVisible}
+        ref={card7Ref}
+        layoutId="card7Ref"
+        selectedCard={selectedCardLayoutId === "card7Ref"}
+        onClick={() => toggleClick("card7Ref")}
+      ></Card4>
+      <Card2
+        isVisible={card8IsVisible}
+        ref={card8Ref}
+        layoutId="card8Ref"
+        selectedCard={selectedCardLayoutId === "card8Ref"}
+        onClick={() => toggleClick("card8Ref")}
+      ></Card2>
+      <Card1
+        isVisible={card9IsVisible}
+        ref={card9Ref}
+        layoutId="card9Ref"
+        selectedCard={selectedCardLayoutId === "card9Ref"}
+      >
         <Music />
       </Card1>
-      <Card2 isVisible={card4IsVisible} ref={card4Ref}></Card2>
-      <Card1 isVisible={card10IsVisible} ref={card10Ref}></Card1>
-      <Card3 isVisible={card11IsVisible} ref={card11Ref}></Card3>
+      <Card2
+        isVisible={card4IsVisible}
+        ref={card4Ref}
+        layoutId="card4Ref"
+        selectedCard={selectedCardLayoutId === "card4Ref"}
+        onClick={() => toggleClick("card4Ref")}
+      ></Card2>
+      <Card1
+        isVisible={card10IsVisible}
+        ref={card10Ref}
+        layoutId="card10Ref"
+        selectedCard={selectedCardLayoutId === "card10Ref"}
+        onClick={() => toggleClick("card10Ref")}
+      ></Card1>
+      <Card3
+        isVisible={card11IsVisible}
+        ref={card11Ref}
+        layoutId="card11Ref"
+        selectedCard={selectedCardLayoutId === "card11Ref"}
+        onClick={() => toggleClick("card11Ref")}
+      ></Card3>
     </Wrapper>
   );
 }

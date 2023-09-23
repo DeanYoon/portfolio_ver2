@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const CardStyle = styled.div`
+export const CardStyle = styled(motion.div)`
   font-size: 100px;
   width: 100%;
   margin-bottom: 30px;
@@ -10,6 +10,7 @@ export const CardStyle = styled.div`
   transform: ${({ isVisible }) => {
     return !isVisible ? "rotateX(10deg) scale(0.9)" : "rotateX(0deg) ";
   }};
+  visibility: ${({ selectedCard }) => (selectedCard ? "hidden" : "")};
   height: 500px;
   transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 30px;
