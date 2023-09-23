@@ -35,19 +35,40 @@ const Focused = styled(motion.div)`
 function App() {
   const [selectedCard, setSelectedCard] = useState(false);
   const [selectedCardLayoutId, setSelectedCardLayoutId] = useState(null);
+  const [widthColumn, setWidthColumn] = useState();
 
   const toggleClick = (layoutId) => {
     setSelectedCard((prev) => !prev);
     setSelectedCardLayoutId(layoutId); // Set the layoutId when a card is clicked
   };
 
+  const updateColumnNumber = () => {
+    if (window.innerWidth > 1400) {
+      setWidthColumn(3);
+    } else if (window.innerWidth > 900) {
+      setWidthColumn(2);
+    } else {
+      setWidthColumn(1);
+    }
+  };
+  useEffect(() => {
+    updateColumnNumber(); // Initial call to set the column number
+    window.addEventListener("resize", updateColumnNumber);
+    return () => {
+      window.removeEventListener("resize", updateColumnNumber);
+    };
+  }, []);
+
   return (
     <Wrapper className="App">
       <Top />
-      <Main
-        toggleClick={toggleClick}
-        selectedCardLayoutId={selectedCardLayoutId}
-      />
+      {widthColumn && (
+        <Main
+          toggleClick={toggleClick}
+          selectedCardLayoutId={selectedCardLayoutId}
+          widthColumn={widthColumn}
+        />
+      )}
       <Bottom />
       {selectedCard ? (
         <>

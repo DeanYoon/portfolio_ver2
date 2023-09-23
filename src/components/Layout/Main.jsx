@@ -40,23 +40,7 @@ const Card4 = styled(CardStyle)`
   background-color: greenyellow;
 `;
 
-const Focused = styled(motion.div)`
-  width: 500px;
-  height: 500px;
-  background-color: tomato;
-  position: fixed;
-  top: 0;
-  left: 0;
-`;
-
-function Main({ toggleClick, selectedCardLayoutId }) {
-  const [widthColumn, setWidthColumn] = useState(2);
-  const [selectedCard, setSelectedCard] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0); // Add this state
-
-  const wrapperRef = useRef();
-  const mainContentRef = useRef();
-
+function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
   const { ref: card1Ref, inView: card1IsVisible } = useInView();
   const { ref: card2Ref, inView: card2IsVisible } = useInView();
   const { ref: card3Ref, inView: card3IsVisible } = useInView();
@@ -69,49 +53,8 @@ function Main({ toggleClick, selectedCardLayoutId }) {
   const { ref: card10Ref, inView: card10IsVisible } = useInView();
   const { ref: card11Ref, inView: card11IsVisible } = useInView();
 
-  const updateColumnNumber = () => {
-    if (window.innerWidth > 1400) {
-      setWidthColumn(3);
-    } else if (window.innerWidth > 900) {
-      setWidthColumn(2);
-    } else {
-      setWidthColumn(1);
-    }
-  };
-
-  // resize
-  useEffect(() => {
-    updateColumnNumber(); // Initial call to set the column number
-    const mainContentElement = mainContentRef.current;
-
-    if (mainContentElement) {
-      if (selectedCardLayoutId) {
-        // Offset the main content to counteract the scroll position
-        mainContentElement.style.transform = `translateY(-${scrollPosition}px)`;
-      } else {
-        mainContentElement.style.transform = "translateY(0)";
-      }
-    }
-
-    window.addEventListener("resize", updateColumnNumber);
-    return () => {
-      window.removeEventListener("resize", updateColumnNumber);
-    };
-  }, []);
-  // Listen for scroll events and update scrollPosition
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollPosition(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
   return (
-    <Wrapper widthColumn={widthColumn} ref={wrapperRef}>
+    <Wrapper widthColumn={widthColumn}>
       <Card
         isVisible={card1IsVisible}
         ref={card1Ref}
@@ -127,9 +70,7 @@ function Main({ toggleClick, selectedCardLayoutId }) {
         layoutId="card2Ref"
         selectedCard={selectedCardLayoutId === "card2Ref"}
         onClick={() => toggleClick("card2Ref")}
-      >
-        {`${selectedCard}`}
-      </Card3>
+      ></Card3>
 
       <Card2
         isVisible={card3IsVisible}
