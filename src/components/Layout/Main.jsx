@@ -6,6 +6,7 @@ import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
 import News from "../Cards/News";
 import { AnimatePresence, motion } from "framer-motion";
+import GPT from "../Cards/GPT";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -86,7 +87,9 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         layoutId="card5Ref"
         selectedCard={selectedCardLayoutId === "card5Ref"}
         onClick={() => toggleClick("card5Ref")}
-      ></Card3>
+      >
+        <GPT />
+      </Card3>
       <Card1
         isVisible={card6IsVisible}
         ref={card6Ref}
