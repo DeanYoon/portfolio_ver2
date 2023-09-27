@@ -4,8 +4,8 @@ import { Card } from "./config";
 import { motion } from "framer-motion";
 import axios from "axios";
 
-const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-
+const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+const geoApiKey = "b49630b961a44c6fb09337475fdbe291";
 const Wrapper = styled(motion.div)`
   position: relative;
   height: 500px;
@@ -55,6 +55,9 @@ function Weather() {
   const constraintsRef = useRef(null);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
+  const [location, setLocation] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
   const [weatherObj, setWeatherObj] = useState({});
   const [temp, setTemp] = useState();
   const updateCirclePosition = (e) => {
@@ -104,7 +107,7 @@ function Weather() {
       // Use lat and lon to make your API request
       axios
         .get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
         )
         .then((response) => {
           setWeatherObj(response.data.weather[0]);
@@ -117,6 +120,20 @@ function Weather() {
     }
   }, [lat, lon]);
 
+  useEffect(() => {
+    if (lat !== null && lon !== null) {
+      axios
+        .get(
+          `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=${geoApiKey}`
+        )
+        .then((response) => {
+          const result = response.data.results[0];
+          setCountry(result.country);
+          setState(result.state);
+        })
+        .catch();
+    }
+  }, [lat, lon]);
   const handleMouseEnter = () => {
     setMouseEntered(true);
   };
@@ -144,7 +161,8 @@ function Weather() {
             src={`https://openweathermap.org/img/wn/${weatherObj.icon}@2x.png`}
           />
         )}
-        <Location>Korea, Seoul</Location>
+        <Location>{country}</Location>
+        <Location>{state}</Location>
         <WeatherDetail>{weatherObj.main}</WeatherDetail>
         <WeatherDetail>{temp}</WeatherDetail>
       </WeatherInfo>
