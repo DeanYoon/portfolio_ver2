@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Card } from "./config";
+import { Card } from "../config";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { getCoordinate, getLocation, getWeather } from "./WeatherData";
 
-const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+// const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+const weatherApiKey = "8b2e178a08521fae2ea030a274060096";
 const geoApiKey = "b49630b961a44c6fb09337475fdbe291";
 const Wrapper = styled(motion.div)`
   position: relative;
@@ -53,13 +55,14 @@ function Weather() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [mouseEntered, setMouseEntered] = useState(false);
   const constraintsRef = useRef(null);
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
-  const [location, setLocation] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [weatherObj, setWeatherObj] = useState({});
-  const [temp, setTemp] = useState();
+
+  const [fetchedData, setFetchedData] = useState({
+    country: "",
+    state: "",
+    weatherObj: {},
+    temp: "",
+  });
+
   const updateCirclePosition = (e) => {
     const mouseX = e.clientX - wrapperPosition.left - circleSize;
     const mouseY = e.clientY - wrapperPosition.top - circleSize;
@@ -91,49 +94,28 @@ function Weather() {
       window.removeEventListener("resize", updateWindowWidth);
     };
   }, [windowWidth, mouseEntered, scrollY]);
+
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLat(position.coords.latitude);
-        setLon(position.coords.longitude);
-      });
-    } else {
-      console.log("Geolocation is not available in this browser.");
-    }
+    const fetchData = async () => {
+      try {
+        const { weatherObj, temp } = await getWeather(weatherApiKey);
+        const { country, state } = await getLocation(geoApiKey);
+        setFetchedData({
+          country,
+          state,
+          weatherObj,
+          temp,
+        });
+        // Use the fetched data as needed
+      } catch (error) {
+        // Handle any errors that occur during the asynchronous operations
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  useEffect(() => {
-    if (lat !== null && lon !== null) {
-      // Use lat and lon to make your API request
-      axios
-        .get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}`
-        )
-        .then((response) => {
-          setWeatherObj(response.data.weather[0]);
-          setTemp(`${Math.floor(response.data.main.temp - 273.15)}'C`);
-          // You can update the WeatherInfo, WeatherIcon, Location, and Weather state here
-        })
-        .catch((error) => {
-          console.error("Error fetching weather data:", error);
-        });
-    }
-  }, [lat, lon]);
-
-  useEffect(() => {
-    if (lat !== null && lon !== null) {
-      axios
-        .get(
-          `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&format=json&apiKey=${geoApiKey}`
-        )
-        .then((response) => {
-          const result = response.data.results[0];
-          setCountry(result.country);
-          setState(result.state);
-        })
-        .catch();
-    }
-  }, [lat, lon]);
   const handleMouseEnter = () => {
     setMouseEntered(true);
   };
@@ -156,15 +138,15 @@ function Weather() {
         isMouseEnter={mouseEntered}
       />
       <WeatherInfo>
-        {weatherObj.icon && (
+        {fetchedData.weatherObj.icon && (
           <WeatherIcon
-            src={`https://openweathermap.org/img/wn/${weatherObj.icon}@2x.png`}
+            src={`https://openweathermap.org/img/wn/${fetchedData.weatherObj.icon}@2x.png`}
           />
         )}
-        <Location>{country}</Location>
-        <Location>{state}</Location>
-        <WeatherDetail>{weatherObj.main}</WeatherDetail>
-        <WeatherDetail>{temp}</WeatherDetail>
+        <Location>{fetchedData.country}</Location>
+        <Location>{fetchedData.state}</Location>
+        <WeatherDetail>{fetchedData.weatherObj.main}</WeatherDetail>
+        <WeatherDetail>{fetchedData.temp}</WeatherDetail>
       </WeatherInfo>
     </Wrapper>
   );

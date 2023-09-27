@@ -1,11 +1,10 @@
 import { styled } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import Weather from "../Cards/Weather";
+import Weather from "../Cards/Weather/Weather";
 import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
 import News from "../Cards/News";
-import { AnimatePresence, motion } from "framer-motion";
 import GPT from "../Cards/GPT";
 
 // const columnWidth = "250px";
