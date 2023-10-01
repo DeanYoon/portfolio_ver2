@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { getCoordinate, getLocation, getWeather } from "./WeatherData";
 
-// const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
-const weatherApiKey = "8b2e178a08521fae2ea030a274060096";
-const geoApiKey = "b49630b961a44c6fb09337475fdbe291";
+const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
+const geoApiKey = process.env.REACT_APP_LOCATION_API_KEY;
 const Wrapper = styled(motion.div)`
   position: relative;
   height: 500px;
