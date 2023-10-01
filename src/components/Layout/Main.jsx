@@ -85,7 +85,7 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         ref={card5Ref}
         layoutId="card5Ref"
         selectedCard={selectedCardLayoutId === "card5Ref"}
-        onClick={() => toggleClick("card5Ref")}
+        // onClick={() => toggleClick("card5Ref")}
       >
         <GPT />
       </Card3>

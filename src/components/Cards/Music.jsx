@@ -41,9 +41,6 @@ const songUrlList = [
 function Music() {
   const [playAudio, setPlayAudio] = useState(false);
   const [songUrl, setSongUrl] = useState("");
-  useEffect(() => {
-    // Make an API request to get video details including thumbnails
-  }, []);
 
   const togglePlayBtn = () => {
     setPlayAudio((prev) => !prev);
