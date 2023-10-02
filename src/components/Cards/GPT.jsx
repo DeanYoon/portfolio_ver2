@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 50px;
+  background-color: ${(props) => (props.hasKeyword ? "inherit" : "black")};
 `;
 const MusicPlay = styled(ReactPlayer)`
   border-radius: 20px;
@@ -40,7 +41,7 @@ function GPT() {
     keyword && getVideoId();
   }, [keyword]);
   return (
-    <Wrapper>
+    <Wrapper hasKeyword={keyword !== ""}>
       {videoId ? (
         <MusicPlay
           url={`https://www.youtube.com/watch?v=${videoId}`}

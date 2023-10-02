@@ -83,7 +83,7 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         <Prompt />
       </Card2>
 
-      <Card3
+      <Card
         isVisible={card5IsVisible}
         ref={card5Ref}
         layoutId="card5Ref"
@@ -91,7 +91,7 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         // onClick={() => toggleClick("card5Ref")}
       >
         <GPT />
-      </Card3>
+      </Card>
       <Card1
         isVisible={card6IsVisible}
         ref={card6Ref}

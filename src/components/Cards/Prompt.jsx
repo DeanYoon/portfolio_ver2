@@ -14,15 +14,25 @@ const Wrapper = styled.div`
 const Form = styled.form`
   display: flex;
   padding: 30px;
+  position: relative;
   input {
     width: 100%;
     height: 100%;
     padding-left: 20px;
+    padding-right: 50px;
     font-size: 30px;
+    border-radius: 30px;
+    outline: none;
   }
-  button {
-    padding: 0;
-  }
+`;
+const Button = styled.button`
+  position: absolute;
+  right: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
 `;
 
 function Prompt() {
@@ -36,9 +46,9 @@ function Prompt() {
     <Wrapper>
       <Form onSubmit={handleSubmit(saveText)}>
         <input {...register("prompt")} placeholder="Tell me your mood" />
-        <button>
+        <Button>
           <KeyboardArrowUpIcon fontSize="large" />
-        </button>
+        </Button>
       </Form>
     </Wrapper>
   );
