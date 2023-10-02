@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { searchVideos } from "../../utils/gpt/youtube";
 import ReactPlayer from "react-player/youtube";
 import { musicRecommend } from "../../utils/gpt/gpt";
+import { useRecoilValue } from "recoil";
+import { promptInput } from "../../atoms";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -20,15 +22,15 @@ const MusicPlay = styled(ReactPlayer)`
 function GPT() {
   const [keyword, setKeyword] = useState("");
   const [videoId, setVideoId] = useState("");
-  const [prompt, setPrompt] = useState("I feel welcome to the jungle rock ");
+  const prompt = useRecoilValue(promptInput);
 
   useEffect(() => {
     const getMusicRecommendation = async () => {
       const gptResult = await musicRecommend(prompt);
       setKeyword(gptResult);
     };
-    getMusicRecommendation();
-  }, []);
+    // prompt && getMusicRecommendation();
+  }, [prompt]);
 
   useEffect(() => {
     const getVideoId = async () => {
@@ -48,7 +50,7 @@ function GPT() {
           playing={true}
         />
       ) : (
-        <div>Token Expired</div>
+        <div>{prompt}</div>
       )}
     </Wrapper>
   );

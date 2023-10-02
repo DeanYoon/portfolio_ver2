@@ -6,6 +6,7 @@ import { CardStyle } from "../Cards/config";
 import Music from "../Cards/Music";
 import News from "../Cards/News";
 import GPT from "../Cards/GPT";
+import Prompt from "../Cards/Prompt";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -77,8 +78,10 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         ref={card3Ref}
         layoutId="card3Ref"
         selectedCard={selectedCardLayoutId === "card3Ref"}
-        onClick={() => toggleClick("card3Ref")}
-      ></Card2>
+        // onClick={() => toggleClick("card3Ref")}
+      >
+        <Prompt />
+      </Card2>
 
       <Card3
         isVisible={card5IsVisible}
