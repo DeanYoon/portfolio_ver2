@@ -29,16 +29,16 @@ const Card1 = styled(CardStyle)`
 
 const Card2 = styled(CardStyle)`
   height: 200px;
-  background-color: red;
+  background-color: #c7beba;
 `;
 const Card3 = styled(CardStyle)`
   height: 600px;
-  background-color: yellow;
+  background-color: #fde440;
 `;
 
 const Card4 = styled(CardStyle)`
   height: 400px;
-  background-color: greenyellow;
+  background-color: #56d270;
 `;
 
 function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {

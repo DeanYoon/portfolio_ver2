@@ -1,6 +1,6 @@
 html {
   background-color: #433e3c;
-  padding: 100px 30px;
+  padding: 100px 100px;
 }
 * {
   box-sizing: border-box;
@@ -10,3 +10,12 @@ a {
   text-decoration: none;
   color: black;
 }
+
+@media (max-width: 800px) {
+  /* Apply different padding when viewport width is 800px or less */
+  html {
+    padding: 100px 30px;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text&family=Noto+Sans+KR:wght@900&family=Noto+Serif+Khojki:wght@600&display=swap");
