@@ -20,6 +20,7 @@ const FocusedBackground = styled.div`
   width: 100vw;
   height: 100%;
   top: 0;
+  z-index: 998;
 `;
 
 const Focused = styled(motion.div)`
@@ -31,6 +32,7 @@ const Focused = styled(motion.div)`
   top: calc(50% - 35vh); /* Center vertically */
   left: calc(50% - 35vw); /* Center horizontally */
   border-radius: 30px;
+  z-index: 999;
 `;
 function App() {
   const [selectedCard, setSelectedCard] = useState(false);
