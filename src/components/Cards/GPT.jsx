@@ -13,8 +13,8 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
-  background-color: ${(props) => (props.hasKeyword ? "inherit" : "black")};
+  font-size: 20px;
+  background-color: ${(props) => (props.hasKeyword ? "inherit" : "#c7beba")};
 `;
 const MusicPlay = styled(ReactPlayer)`
   border-radius: 20px;
@@ -51,7 +51,7 @@ function GPT() {
           playing={true}
         />
       ) : (
-        <div>{prompt}</div>
+        <div>{prompt && "Loading..."}</div>
       )}
     </Wrapper>
   );

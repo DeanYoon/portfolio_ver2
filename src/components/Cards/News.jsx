@@ -23,47 +23,69 @@ const Title = styled.div`
   font-size: 30px;
   padding-top: 20px;
 `;
+const ErrorMessage = styled.div`
+  text-align: center;
+  font-size: 20px;
+  color: red;
+  padding-top: 20px;
+`;
 
 const apiKey = process.env.REACT_APP_NEWS_API_KEY;
 
 function News() {
   const [newsList, setNewsList] = useState([]);
   const [news, setNews] = useState({});
+  const [error, setError] = useState(null);
   const isEng = useRecoilValue(language);
+  let truncatedTitle = "";
   const getNews = async () => {
-    await axios
-      .get(
+    try {
+      const response = await axios.get(
         `https://newsapi.org/v2/top-headlines?country=${
           isEng ? "us" : "kr"
         }&apiKey=${apiKey}`
-      )
-      .then((response) => {
+      );
+
+      if (response.data.articles) {
         const filteredNewsList = response.data.articles.filter(
           (article) => article.urlToImage
         );
         setNewsList(filteredNewsList);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        setError(null);
+      } else {
+        setError("Error fetching news data.");
+      }
+    } catch (error) {
+      setError("Error fetching news data.");
+      console.error(error);
+    }
   };
+
   useEffect(() => {
     getNews();
   }, [isEng]);
+
   useEffect(() => {
-    setNews(newsList[Math.floor(Math.random() * newsList.length)]);
+    newsList && setNews(newsList[Math.floor(Math.random() * newsList.length)]);
   }, [newsList]);
-  const truncatedTitle =
-    news.title && news.title.length > 70
-      ? news.title.slice(0, 70) + "..."
-      : news.title;
+
+  if (news) {
+    truncatedTitle =
+      news.title && news.title.length > 70
+        ? news.title.slice(0, 70) + "..."
+        : news.title;
+  }
   return (
     <>
-      {news && (
-        <Wrapper href={news.url ? news.url : "#"} target="_blank">
-          <NewsImage src={news.urlToImage ? news.urlToImage : ""} />
-          <Title>{news.title ? truncatedTitle : ""}</Title>
-        </Wrapper>
+      {error ? (
+        <ErrorMessage>{error}</ErrorMessage>
+      ) : (
+        news && (
+          <Wrapper href={news.url ? news.url : "#"} target="_blank">
+            <NewsImage src={news.urlToImage ? news.urlToImage : ""} />
+            <Title>{news.title ? truncatedTitle : ""}</Title>
+          </Wrapper>
+        )
       )}
     </>
   );

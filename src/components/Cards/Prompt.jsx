@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: black;
+  background-color: #c7beba;
   border-radius: inherit;
 `;
 const Form = styled.form`
@@ -23,6 +23,7 @@ const Form = styled.form`
     font-size: 30px;
     border-radius: 30px;
     outline: none;
+    border: none;
   }
 `;
 const Button = styled.button`
