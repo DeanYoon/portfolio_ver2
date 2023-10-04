@@ -7,6 +7,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"; // Import the envelope icon from the regular category
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRecoilValue } from "recoil";
+import { language } from "../../atoms";
+import { addressEng, addressKor } from "./text";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
@@ -39,12 +42,13 @@ const Content = styled.div`
 `;
 
 function Bottom() {
+  const isEng = useRecoilValue(language);
   return (
     <Wrapper>
       <GridContainer>
         <Grid>
           <Title>Location</Title>
-          <Content>Jeongja-dong Bundang-gu, South Korea</Content>
+          <Content>{isEng ? addressEng : addressKor}</Content>
         </Grid>
         <Grid>
           <Title>Github</Title>

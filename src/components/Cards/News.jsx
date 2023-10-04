@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { language } from "../../atoms";
 
 const Wrapper = styled.a`
   display: flex;
@@ -27,9 +29,14 @@ const apiKey = process.env.REACT_APP_NEWS_API_KEY;
 function News() {
   const [newsList, setNewsList] = useState([]);
   const [news, setNews] = useState({});
+  const isEng = useRecoilValue(language);
   const getNews = async () => {
     await axios
-      .get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`)
+      .get(
+        `https://newsapi.org/v2/top-headlines?country=${
+          isEng ? "en" : "kr"
+        }&apiKey=${apiKey}`
+      )
       .then((response) => {
         const filteredNewsList = response.data.articles.filter(
           (article) => article.urlToImage
