@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { language } from "../../atoms";
-import { aboutTextEng, aboutTextKor } from "./text";
+import textData from "./text";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
@@ -143,7 +143,7 @@ function Top() {
                 animate="visible"
                 exit="initial"
               >
-                {aboutTextEng}
+                {textData.about.eng}
               </AboutEng>
             ) : (
               <AboutKor
@@ -152,7 +152,7 @@ function Top() {
                 animate="visible"
                 exit="initial"
               >
-                {aboutTextKor}
+                {textData.about.kor}
               </AboutKor>
             )}
           </AnimatePresence>

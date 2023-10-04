@@ -9,7 +9,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons"; // Import the 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilValue } from "recoil";
 import { language } from "../../atoms";
-import { addressEng, addressKor } from "./text";
+import textData, { addressEng, addressKor } from "./text";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
@@ -48,7 +48,9 @@ function Bottom() {
       <GridContainer>
         <Grid>
           <Title>Location</Title>
-          <Content>{isEng ? addressEng : addressKor}</Content>
+          <Content>
+            {isEng ? textData.address.eng : textData.address.kor}
+          </Content>
         </Grid>
         <Grid>
           <Title>Github</Title>

@@ -34,7 +34,7 @@ function News() {
     await axios
       .get(
         `https://newsapi.org/v2/top-headlines?country=${
-          isEng ? "en" : "kr"
+          isEng ? "us" : "kr"
         }&apiKey=${apiKey}`
       )
       .then((response) => {
@@ -49,17 +49,20 @@ function News() {
   };
   useEffect(() => {
     getNews();
-  }, []);
+  }, [isEng]);
   useEffect(() => {
     setNews(newsList[Math.floor(Math.random() * newsList.length)]);
   }, [newsList]);
-
+  const truncatedTitle =
+    news.title && news.title.length > 70
+      ? news.title.slice(0, 70) + "..."
+      : news.title;
   return (
     <>
       {news && (
         <Wrapper href={news.url ? news.url : "#"} target="_blank">
           <NewsImage src={news.urlToImage ? news.urlToImage : ""} />
-          <Title>{news.title ? news.title : ""}</Title>
+          <Title>{news.title ? truncatedTitle : ""}</Title>
         </Wrapper>
       )}
     </>
