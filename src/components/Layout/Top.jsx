@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 import Topic from "../Topic";
 import { maxWidthValue } from "../../config";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
@@ -51,6 +51,8 @@ const BottomRight = styled.div`
   font-size: 20px;
   color: #888888;
 `;
+const AboutEng = styled(motion.div)``;
+const AboutKor = styled(motion.div)``;
 const LangButton = styled(motion.div)`
   margin-top: 50px;
   background-color: white;
@@ -90,15 +92,22 @@ const ClickedKor = styled(Clicked)`
 `;
 const ClickedEng = styled(Clicked)``;
 
-const spring = {
-  type: "spring",
-  stiffness: 700,
-  damping: 30,
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
 };
+
 function Top() {
   const [opacity, setOpacity] = useState(0);
   const [isEng, setIsEng] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+
+  const mainRef = useRef(null);
+
   useEffect(() => {
     setOpacity(1);
     // After 1 second (1000 milliseconds), set isVisible to true
@@ -107,7 +116,9 @@ function Top() {
     }, 2000);
 
     // Cleanup the timeout to prevent memory leaks
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const handleClick = () => {
@@ -115,25 +126,41 @@ function Top() {
   };
 
   return (
-    <Wrapper opacity={opacity}>
+    <Wrapper ref={mainRef} opacity={opacity}>
       <Main isVisible={isVisible}>Dean's Portfolio</Main>
       <Bottom isVisible={isVisible}>
         <BottomLeft>About</BottomLeft>
-        {isEng ? (
-          <BottomRight>
-            I'm a junior Frontend Developer with a strong appetite for learning
-            new technologies. My attention to detail ensures I deliver
-            high-quality work, and my passion lies in crafting diverse web
-            development projects. I'm open to new opportunities and eager to
-            contribute to exciting ventures.
-          </BottomRight>
-        ) : (
-          <BottomRight>
-            저는 주니어 프론트엔드 개발자로, 새로운 기술을 배우는 것을
-            좋아합니다. 디테일에 집중하여 높은 품질의 작업을 제공하려고
-            노력하며, 웹 개발에 관한 다양한 프로젝트를 만드는 것을 지향합니다.
-          </BottomRight>
-        )}
+
+        <BottomRight>
+          <AnimatePresence>
+            {isEng ? (
+              <AboutEng
+                variants={variants}
+                initial="initial"
+                animate="visible"
+                exit="initial"
+              >
+                I'm a junior Frontend Developer with a strong appetite for
+                learning new technologies. My attention to detail ensures I
+                deliver high-quality work, and my passion lies in crafting
+                diverse web development projects. I'm open to new opportunities
+                and eager to contribute to exciting ventures.
+              </AboutEng>
+            ) : (
+              <AboutKor
+                variants={variants}
+                initial="initial"
+                animate="visible"
+                exit="initial"
+              >
+                저는 주니어 프론트엔드 개발자로, 새로운 기술을 배우는 것을
+                좋아합니다. 디테일에 집중하여 높은 품질의 작업을 제공하려고
+                노력하며, 웹 개발에 관한 다양한 프로젝트를 만드는 것을
+                지향합니다.
+              </AboutKor>
+            )}
+          </AnimatePresence>
+        </BottomRight>
       </Bottom>
       <LangButton isVisible={isVisible} onClick={handleClick}>
         <Kor isEng={isEng}>Kor</Kor>
