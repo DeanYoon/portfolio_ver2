@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   background-color: #c7beba;
   border-radius: inherit;
 `;
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   padding: 30px;
   position: relative;

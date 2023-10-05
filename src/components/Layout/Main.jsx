@@ -7,6 +7,7 @@ import Music from "../Cards/Music";
 import News from "../Cards/News";
 import GPT from "../Cards/GPT";
 import Prompt from "../Cards/Prompt";
+import GuestNote from "../Cards/GuestNote";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
@@ -134,8 +135,11 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         ref={card10Ref}
         layoutId="card10Ref"
         selectedCard={selectedCardLayoutId === "card10Ref"}
-        onClick={() => toggleClick("card10Ref")}
-      ></Card1>
+        // onClick={() => toggleClick("card10Ref")}
+      >
+        {" "}
+        <GuestNote />
+      </Card1>
       <Card3
         isVisible={card11IsVisible}
         ref={card11Ref}
