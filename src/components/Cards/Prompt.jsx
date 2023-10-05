@@ -11,8 +11,9 @@ const Wrapper = styled.div`
   background-color: #c7beba;
   border-radius: inherit;
 `;
-export const Form = styled.form`
+const Form = styled.form`
   display: flex;
+  flex-direction: column;
   padding: 30px;
   position: relative;
   input {
@@ -29,6 +30,7 @@ export const Form = styled.form`
 const Button = styled.button`
   position: absolute;
   right: 40px;
+
   padding: 0;
   border: none;
   background: none;

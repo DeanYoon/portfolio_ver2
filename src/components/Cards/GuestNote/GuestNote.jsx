@@ -1,39 +1,63 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { Form } from "./Prompt";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
-const requestIp = require("request-ip");
-
-// import formatTimeAgo from "../../utils/dateUtils";
+import CommentText from "./GuestComment";
 
 const Wrapper = styled.div`
-  font-size: 30px;
+  font-size: 20px;
   height: 100%; /* Adjust the maximum height as needed */
+`;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  position: relative;
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px;
+    font-size: 30px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+  }
+`;
+const SubmitWrapper = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  input {
+    width: 40%;
+  }
+  button {
+    width: 40%;
+    border-radius: 100px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #d8d8d8;
+    &:hover {
+      background-color: #00000054;
+      transition: all 0.3s ease-in-out;
+    }
+  }
 `;
 
 const CommentWrapper = styled.div`
   padding: 0 30px;
-  max-height: 80%;
+  max-height: 70%;
   overflow-y: auto;
 `;
-const CommentText = styled.li`
-  list-style-type: none; /* Remove the bullet point */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const User = styled.span``;
-const Text = styled.span``;
-const Time = styled.span`
-  font-size: 20px;
-`;
+
 function GuestNote() {
   const { register, handleSubmit, reset } = useForm();
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState();
   const [comments, setComments] = useState([]);
-  const [insertedComment, setInsertedComment] = useState();
+  const [deletedIndex, setDeletedIndex] = useState();
   const commentWrapperRef = useRef(null);
+
   // Function to fetch comments from the server
   const getComments = async () => {
     try {
@@ -48,8 +72,8 @@ function GuestNote() {
   const postComment = async () => {
     if (comment) {
       const data = {
-        ip: "127.0.1.2",
-        text: comment,
+        password: comment.password,
+        text: comment.text,
       };
       try {
         const response = await axios.post("http://localhost:4000/", data);
@@ -63,7 +87,7 @@ function GuestNote() {
   // Fetch comments from the server when the component mounts
   useEffect(() => {
     getComments();
-  }, []);
+  }, [deletedIndex]);
 
   // Post a comment when 'comment' state changes
   useEffect(() => {
@@ -76,45 +100,42 @@ function GuestNote() {
         commentWrapperRef.current.scrollHeight;
     }
   }, [comments]);
+
   // Handler for form submission
   const saveText = (data) => {
-    setComment(data.comment);
+    setComment(data);
     reset();
-  };
-  const formatTimeAgo = (date) => {
-    const now = new Date();
-    const diff = now.getTime() - date.getTime();
-    if (diff < 1000 * 60) {
-      return `${Math.floor(diff / 1000)}s`;
-    } else if (diff < 1000 * 60 * 60) {
-      return `${Math.floor(diff / (1000 * 60))}m`;
-    } else if (diff < 1000 * 60 * 60 * 24) {
-      return `${Math.floor(diff / (1000 * 60 * 60))}h`;
-    } else if (diff < 1000 * 60 * 60 * 24 * 30) {
-      return `${Math.floor(diff / (1000 * 60 * 60 * 24))}d`;
-    } else {
-      const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-      const formattedDate = new Date(date).toLocaleDateString("ko-KR", options);
-      return formattedDate;
-    }
   };
 
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit(saveText)}>
         <input
-          {...register("comment")}
-          placeholder="Leave comment or feedback"
+          {...register("text")}
+          placeholder="comment or feedback"
           required
         />
+        <SubmitWrapper>
+          <input
+            {...register("password")}
+            type="password"
+            minlength="4"
+            maxLength="4"
+            placeholder="password"
+            required
+          />
+          <button>submit</button>
+        </SubmitWrapper>
       </Form>
 
       <CommentWrapper ref={commentWrapperRef}>
         {comments?.map((comment, index) => (
-          <CommentText key={index}>
-            <Text>{comment.text}</Text>
-            <Time>{formatTimeAgo(new Date(comment.time))}</Time>
-          </CommentText>
+          <CommentText
+            key={index}
+            index={index}
+            comment={comment}
+            setDeletedIndex={setDeletedIndex}
+          />
         ))}
       </CommentWrapper>
     </Wrapper>

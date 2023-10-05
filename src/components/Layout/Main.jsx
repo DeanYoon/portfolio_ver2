@@ -7,7 +7,7 @@ import Music from "../Cards/Music";
 import News from "../Cards/News";
 import GPT from "../Cards/GPT";
 import Prompt from "../Cards/Prompt";
-import GuestNote from "../Cards/GuestNote";
+import GuestNote from "../Cards/GuestNote/GuestNote";
 
 // const columnWidth = "250px";
 // const row_increment = "10px";
