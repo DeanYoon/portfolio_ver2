@@ -41,7 +41,7 @@ function News() {
   const getNews = async () => {
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=${
+        `http://newsapi.org/v2/top-headlines?country=${
           isEng ? "us" : "kr"
         }&apiKey=${apiKey}`
       );
