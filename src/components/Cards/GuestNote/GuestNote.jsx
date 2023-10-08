@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import CommentText from "./GuestComment";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const Wrapper = styled.div`
   font-size: 20px;
   height: 100%; /* Adjust the maximum height as needed */
@@ -61,8 +61,9 @@ function GuestNote() {
   // Function to fetch comments from the server
   const getComments = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/");
+      const response = await axios.get(`${API_URL}/`);
       setComments(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -76,7 +77,7 @@ function GuestNote() {
         text: comment.text,
       };
       try {
-        const response = await axios.post("http://localhost:4000/", data);
+        const response = await axios.post(`${API_URL}/`, data);
         setComments([...comments, response.data]);
       } catch (error) {
         console.error("Error posting comment:", error);

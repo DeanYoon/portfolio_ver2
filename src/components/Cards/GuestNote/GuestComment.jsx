@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const CommentTextWrapper = styled.li`
   list-style-type: none;
@@ -98,10 +99,7 @@ function CommentText({ comment, index, setDeletedIndex }) {
       text: comment.text,
     };
     try {
-      const response = await axios.post(
-        "http://localhost:4000/delete/",
-        deleteData
-      );
+      const response = await axios.post(`${API_URL}/delete/`, deleteData);
       setDeletedIndex(index);
       setDeleteClicked(false);
     } catch (error) {
