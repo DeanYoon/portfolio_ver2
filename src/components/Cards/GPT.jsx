@@ -30,7 +30,7 @@ function GPT() {
       const gptResult = await musicRecommend(prompt);
       setKeyword(gptResult);
     };
-    // prompt && getMusicRecommendation();
+    prompt && getMusicRecommendation();
   }, [prompt]);
 
   useEffect(() => {
