@@ -63,7 +63,6 @@ function GuestNote() {
     try {
       const response = await axios.get(`${API_URL}/`);
       setComments(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }

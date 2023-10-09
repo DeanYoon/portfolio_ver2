@@ -29,10 +29,18 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   font-size: 150px;
+
+  @media (max-width: 900px) {
+    font-size: 100px; /* Font size for screens smaller than 900px */
+  }
+
+  @media (max-width: 500px) {
+    font-size: 50px; /* Font size for screens smaller than 500px */
+  }
+
   text-align: center;
   margin-bottom: 50px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)}; /* Toggle opacity */
-
   transition: opacity 0.5s ease-in-out, background-position 1s ease-in-out;
 `;
 const Bottom = styled.div`
@@ -46,9 +54,13 @@ const Bottom = styled.div`
 const BottomLeft = styled.div`
   width: 20%;
   font-size: 30px;
+  @media (max-width: 700px) {
+    display: none; /* Hide BottomLeft when screen width is smaller than 700px */
+  }
+  margin-right: 20px;
 `;
 const BottomRight = styled.div`
-  width: 80%;
+  width: 100%;
   line-height: 1.5;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;

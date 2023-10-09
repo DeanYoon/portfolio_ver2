@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const CardStyle = styled(motion.div)`
   font-size: 100px;
   width: 100%;
+  min-width: 300px;
   margin-bottom: 30px;
   break-inside: avoid;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};

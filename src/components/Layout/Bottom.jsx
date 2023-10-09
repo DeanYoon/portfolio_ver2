@@ -14,7 +14,7 @@ import textData, { addressEng, addressKor } from "./text";
 const Wrapper = styled.div`
   background-color: #f1e6e4;
   max-width: ${maxWidthValue};
-  min-width: 400px;
+  min-width: 300px;
   width: 100%;
   /* height: 300px; */
   border-radius: 30px;
@@ -85,6 +85,15 @@ function Bottom() {
             {" "}
             <a href="https://www.instagram.com/yoon_dean/" target="_blank">
               <FontAwesomeIcon icon={faInstagram} size="2x" />
+            </a>
+          </Content>
+        </Grid>
+
+        <Grid>
+          <Title>CV</Title>
+          <Content>
+            <a href="/resume.pdf" target="_blank">
+              Open CV
             </a>
           </Content>
         </Grid>
