@@ -31,7 +31,7 @@ const ErrorMessage = styled.div`
 `;
 
 const apiKey = process.env.REACT_APP_NEWS_API_KEY;
-
+const apiUrl = process.env.REACT_APP_API_URL;
 function News() {
   const [newsList, setNewsList] = useState([]);
   const [news, setNews] = useState({});
@@ -40,14 +40,10 @@ function News() {
   let truncatedTitle = "";
   const getNews = async () => {
     try {
-      const response = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=${
-          isEng ? "us" : "kr"
-        }&apiKey=${apiKey}`
-      );
+      const response = await axios.get(`${apiUrl}/news/${isEng ? "us" : "kr"}`);
 
-      if (response.data.articles) {
-        const filteredNewsList = response.data.articles.filter(
+      if (response.data) {
+        const filteredNewsList = response.data.filter(
           (article) => article.urlToImage
         );
         setNewsList(filteredNewsList);
