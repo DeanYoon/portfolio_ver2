@@ -9,9 +9,6 @@ import GPT from "../Cards/GPT";
 import Prompt from "../Cards/Prompt";
 import GuestNote from "../Cards/GuestNote/GuestNote";
 
-// const columnWidth = "250px";
-// const row_increment = "10px";
-
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1400px;
@@ -44,7 +41,7 @@ const Card4 = styled(CardStyle)`
 
 function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
   const { ref: card1Ref, inView: card1IsVisible } = useInView();
-  const { ref: card2Ref, inView: card2IsVisible } = useInView();
+  const { ref: project1, inView: card2IsVisible } = useInView();
   const { ref: card3Ref, inView: card3IsVisible } = useInView();
   const { ref: card4Ref, inView: card4IsVisible } = useInView();
   const { ref: card5Ref, inView: card5IsVisible } = useInView();
@@ -53,7 +50,7 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
   const { ref: card8Ref, inView: card8IsVisible } = useInView();
   const { ref: card9Ref, inView: card9IsVisible } = useInView();
   const { ref: card10Ref, inView: card10IsVisible } = useInView();
-  const { ref: card11Ref, inView: card11IsVisible } = useInView();
+  const { ref: project2, inView: card11IsVisible } = useInView();
 
   return (
     <Wrapper widthColumn={widthColumn}>
@@ -68,10 +65,10 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
 
       <Card3
         isVisible={card2IsVisible}
-        ref={card2Ref}
-        layoutId="card2Ref"
-        selectedCard={selectedCardLayoutId === "card2Ref"}
-        onClick={() => toggleClick("card2Ref")}
+        ref={project1}
+        layoutId="project1"
+        selectedCard={selectedCardLayoutId === "project1"}
+        onClick={() => toggleClick("project1")}
       ></Card3>
 
       <Card2
@@ -142,10 +139,10 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
       </Card1>
       <Card3
         isVisible={card11IsVisible}
-        ref={card11Ref}
-        layoutId="card11Ref"
-        selectedCard={selectedCardLayoutId === "card11Ref"}
-        onClick={() => toggleClick("card11Ref")}
+        ref={project2}
+        layoutId="project2"
+        selectedCard={selectedCardLayoutId === "project2"}
+        onClick={() => toggleClick("project2")}
       ></Card3>
     </Wrapper>
   );

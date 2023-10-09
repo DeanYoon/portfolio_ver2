@@ -5,6 +5,7 @@ import Bottom from "./components/Layout/Bottom";
 import Top from "./components/Layout/Top";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import Portfolio from "./components/Portfolio";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ const Focused = styled(motion.div)`
   opacity: 1;
   width: 70vw;
   height: 70vh;
-  background-color: tomato;
+  background-color: #625a57;
   position: fixed;
   top: calc(50% - 35vh); /* Center vertically */
   left: calc(50% - 35vw); /* Center horizontally */
@@ -75,7 +76,9 @@ function App() {
       {selectedCard ? (
         <>
           <FocusedBackground onClick={() => toggleClick(null)} />
-          <Focused layoutId={selectedCardLayoutId}></Focused>
+          <Focused layoutId={selectedCardLayoutId}>
+            <Portfolio selectedCardLayoutId={selectedCardLayoutId} />
+          </Focused>
         </>
       ) : null}
     </Wrapper>

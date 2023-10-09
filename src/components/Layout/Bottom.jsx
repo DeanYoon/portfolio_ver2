@@ -39,6 +39,13 @@ const Title = styled.div`
 `;
 const Content = styled.div`
   color: #888888;
+  font-weight: bolder;
+  a:hover {
+    text-decoration: underline;
+
+    color: red;
+    transition: all 0.2s ease-in-out;
+  }
 `;
 
 function Bottom() {
