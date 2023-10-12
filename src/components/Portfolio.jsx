@@ -2,7 +2,9 @@ import styled from "styled-components";
 import projectData from "../projectData";
 import { useRecoilValue } from "recoil";
 import { language } from "../atoms";
-
+import PublicIcon from "@mui/icons-material/Public";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -37,11 +39,27 @@ const Skills = styled.div`
 const Explain = styled.div`
   line-height: 25px;
 `;
+
+const LinkWrapper = styled.div`
+  display: flex;
+`;
+
+const Link = styled.a`
+  color: white;
+  margin: 10px;
+`;
 function Portfolio({ selectedCardLayoutId }) {
   const project = projectData[selectedCardLayoutId];
   const isEng = useRecoilValue(language);
 
-  const { title, imgUrl, frontendSkills, backendSkills, explanation } = project;
+  const {
+    title,
+    imgUrl,
+    frontendSkills,
+    backendSkills,
+    explanation,
+    projectURL,
+  } = project;
 
   return (
     <Wrapper>
@@ -54,6 +72,15 @@ function Portfolio({ selectedCardLayoutId }) {
         </Skills>
 
         <Explain>{isEng ? explanation.en : explanation.ko}</Explain>
+
+        <LinkWrapper>
+          <Link href={projectURL.live} target="_blank">
+            <PublicIcon fontSize="large" />
+          </Link>
+          <Link href={projectURL.github} target="_blank">
+            <FontAwesomeIcon icon={faGithub} size="2x" />
+          </Link>
+        </LinkWrapper>
       </PortFolioContent>
     </Wrapper>
   );

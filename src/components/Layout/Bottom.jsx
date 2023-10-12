@@ -9,7 +9,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons"; // Import the 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRecoilValue } from "recoil";
 import { language } from "../../atoms";
-import textData, { addressEng, addressKor } from "./text";
+import textData from "./text";
 
 const Wrapper = styled.div`
   background-color: #f1e6e4;
