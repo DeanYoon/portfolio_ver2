@@ -34,7 +34,9 @@ const Title = styled.div`
 const Skills = styled.div`
   font-size: 20px;
 `;
-const Explain = styled.div``;
+const Explain = styled.div`
+  line-height: 25px;
+`;
 function Portfolio({ selectedCardLayoutId }) {
   const project = projectData[selectedCardLayoutId];
   const isEng = useRecoilValue(language);
@@ -47,8 +49,8 @@ function Portfolio({ selectedCardLayoutId }) {
       <PortFolioContent>
         <Title>{isEng ? title.en : title.ko}</Title>
         <Skills>
-          <div>{frontendSkills}</div>
-          <div>{backendSkills}</div>
+          <div>Front : {frontendSkills}</div>
+          <div>Back : {backendSkills}</div>
         </Skills>
 
         <Explain>{isEng ? explanation.en : explanation.ko}</Explain>

@@ -8,6 +8,8 @@ import News from "../Cards/News";
 import GPT from "../Cards/GPT";
 import Prompt from "../Cards/Prompt";
 import GuestNote from "../Cards/GuestNote/GuestNote";
+import Portfolio from "../Portfolio";
+import PortfolioCard from "../Cards/PortfolioCard";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -30,12 +32,12 @@ const Card2 = styled(CardStyle)`
   background-color: #c7beba;
 `;
 const Card3 = styled(CardStyle)`
-  height: 600px;
+  height: 500px;
   background-color: #fde440;
 `;
 
 const Card4 = styled(CardStyle)`
-  height: 400px;
+  height: 800px;
   background-color: #56d270;
 `;
 
@@ -69,7 +71,9 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         layoutId="project1"
         selectedCard={selectedCardLayoutId === "project1"}
         onClick={() => toggleClick("project1")}
-      ></Card3>
+      >
+        <PortfolioCard project="project1" />
+      </Card3>
 
       <Card2
         isVisible={card3IsVisible}
@@ -103,14 +107,14 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         ref={card7Ref}
         layoutId="card7Ref"
         selectedCard={selectedCardLayoutId === "card7Ref"}
-        onClick={() => toggleClick("card7Ref")}
+        // onClick={() => toggleClick("card7Ref")}
       ></Card4>
       <Card2
         isVisible={card8IsVisible}
         ref={card8Ref}
         layoutId="card8Ref"
         selectedCard={selectedCardLayoutId === "card8Ref"}
-        onClick={() => toggleClick("card8Ref")}
+        // onClick={() => toggleClick("card8Ref")}
       ></Card2>
       <Card1
         isVisible={card9IsVisible}
@@ -125,7 +129,7 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         ref={card4Ref}
         layoutId="card4Ref"
         selectedCard={selectedCardLayoutId === "card4Ref"}
-        onClick={() => toggleClick("card4Ref")}
+        // onClick={() => toggleClick("card4Ref")}
       ></Card2>
       <Card1
         isVisible={card10IsVisible}
@@ -143,7 +147,9 @@ function Main({ toggleClick, selectedCardLayoutId, widthColumn }) {
         layoutId="project2"
         selectedCard={selectedCardLayoutId === "project2"}
         onClick={() => toggleClick("project2")}
-      ></Card3>
+      >
+        <PortfolioCard project="project2" />
+      </Card3>
     </Wrapper>
   );
 }

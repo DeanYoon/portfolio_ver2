@@ -15,10 +15,10 @@ export const CardStyle = styled(motion.div)`
   height: 500px;
   transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
   border-radius: 30px;
-
   cursor: pointer;
   &:hover {
     transition: transform 0.5s;
     transform: scale(1.03);
+    box-shadow: 0px 0px 30px -10px black;
   }
 `;
