@@ -11,11 +11,20 @@ const Wrapper = styled.div`
   background-color: #c7beba;
   border-radius: inherit;
 `;
+const Title = styled.div`
+  font-size: 30px;
+  text-align: center;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 30px;
+`;
+
+const InputWrapper = styled.div`
+  font-size: 1px;
   position: relative;
+  margin-top: 20px;
   input {
     width: 100%;
     height: 100%;
@@ -27,11 +36,11 @@ const Form = styled.form`
     border: none;
   }
 `;
+
 const Button = styled.button`
   position: absolute;
-  right: 40px;
-
   padding: 0;
+  right: 10px;
   border: none;
   background: none;
   cursor: pointer;
@@ -48,10 +57,13 @@ function Prompt() {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmit(saveText)}>
-        <input {...register("prompt")} placeholder="Tell me your mood" />
-        <Button>
-          <KeyboardArrowUpIcon fontSize="large" />
-        </Button>
+        <Title>Music Recommender</Title>
+        <InputWrapper>
+          <input {...register("prompt")} placeholder="Tell me your mood" />
+          <Button>
+            <KeyboardArrowUpIcon fontSize="large" />
+          </Button>
+        </InputWrapper>
       </Form>
     </Wrapper>
   );

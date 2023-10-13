@@ -57,6 +57,20 @@ const DeleteIcon = styled.div`
   font-size: 40px;
   color: red;
 `;
+
+const PasswordInput = styled.input`
+  border-radius: 5px;
+  border: none;
+  height: 50%;
+`;
+const DeleteButton = styled.button`
+  border-radius: 5px;
+  border: none;
+  height: 50%;
+  margin: 0 10px;
+  background-color: white;
+  cursor: pointer;
+`;
 function CommentText({ comment, index, setDeletedIndex }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [deleteClicked, setDeleteClicked] = useState(false);
@@ -121,7 +135,7 @@ function CommentText({ comment, index, setDeletedIndex }) {
         <DeleteForm onSubmit={handleSubmit(checkPassword)}>
           <DeleteFormBackground onClick={handleDeleteFormBackgroundClick} />
 
-          <input
+          <PasswordInput
             {...register("password")}
             type="password"
             minlength="4"
@@ -129,7 +143,7 @@ function CommentText({ comment, index, setDeletedIndex }) {
             placeholder="password"
             required
           />
-          <button>submit</button>
+          <DeleteButton>delete</DeleteButton>
         </DeleteForm>
       )}
     </CommentTextWrapper>
