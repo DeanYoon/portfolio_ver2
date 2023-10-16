@@ -7,13 +7,13 @@ export const CardStyle = styled(motion.div)`
   min-width: 300px;
   margin-bottom: 30px;
   break-inside: avoid;
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  /* opacity: ${({ isVisible }) => (isVisible ? 1 : 0)}; */
   transform: ${({ isVisible }) => {
-    return !isVisible ? "rotateX(10deg) scale(0.9)" : "rotateX(0deg) ";
+    return !isVisible ? "rotateX(10deg)  " : "rotateX(0deg)";
   }};
   visibility: ${({ selectedCard }) => (selectedCard ? "hidden" : "")};
   height: 500px;
-  transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+  transition: transform 0.5s ease-in-out;
   border-radius: 30px;
   cursor: pointer;
   &:hover {
