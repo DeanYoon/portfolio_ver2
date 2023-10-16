@@ -55,6 +55,18 @@ Welcome to my portfolio website! This project showcases my work and skills using
 
 ![Portfolio Card](public/imgs/readmeImg/portfolio.gif)
 
+### Card Animation
+
+- Engaging flip animation when cards appear on the screen.
+
+![Portfolio Card](public/imgs/readmeImg/cardStyle.gif)
+
+### Card Display Adaptation
+
+- Responsive grid layout for optimal viewing on various devices.
+
+![Portfolio Card](public/imgs/readmeImg/reactive.gif)
+
 ## Getting Started
 
 1. Clone this repository.
