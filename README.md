@@ -9,6 +9,8 @@ Welcome to my portfolio website! This project showcases my work and skills using
 - Database: MongoDB
 - APIs: YouTube Data API, OpenAI API, News API, Weather API, Geometry API
 
+![Begin](public/imgs/readmeImg/initial.gif)
+
 ## Features
 
 ### Card 1 - Weather Info
@@ -16,16 +18,22 @@ Welcome to my portfolio website! This project showcases my work and skills using
 - Get current longitude and latitude, city information, and weather details using the Weather API.
 - Utilizes Framer Motion for interactive elements.
 
+![Weather Card](public/imgs/readmeImg/weather.gif)
+
 ### Card 2 - Music Recommender
 
 - Recommends music using the OpenAI API by analyzing user input.
 - Retrieves singer and song names and uses the YouTube Data API to get video data.
 - Allows users to play the recommended music.
 
+![Music Recommender Card](public/imgs/readmeImg/songRecommender.gif)
+
 ### Card 3 - Headline News by Language
 
 - Displays top headlines from the News API.
 - Allows users to choose a language to view news in and shows a random headline from a selection of 20.
+
+![News Card](public/imgs/readmeImg/news.png)
 
 ### Card 4 - Background Music
 
@@ -37,11 +45,15 @@ Welcome to my portfolio website! This project showcases my work and skills using
 - Allows users to submit comments and save them to the backend using RESTful API endpoints.
 - Comment timestamps are displayed, and users can delete comments by entering a password.
 
+![Guest Book Card](public/imgs/readmeImg/guestBook.gif)
+
 ### Other Cards - Portfolio Showcase
 
 - Showcases my other projects with captured images and titles.
 - Clicking on a portfolio card enlarges it and centers it in the window.
 - Detailed project information is displayed, and clicking the dark background returns the card to its original position.
+
+![Portfolio Card](public/imgs/readmeImg/portfolio.gif)
 
 ## Getting Started
 
