@@ -51,7 +51,7 @@ Welcome to my portfolio website! This project showcases my work and skills using
 
 ## Demo
 
-You can view the live demo of this project at [Your Portfolio Website URL](https://portfolio-ver2-chi.vercel.app/).
+You can view the live demo of this project at [Dean's Portfolio](https://portfolio-ver2-chi.vercel.app/).
 
 ## Contact
 
