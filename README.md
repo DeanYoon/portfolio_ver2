@@ -1,31 +1,60 @@
-# Create React App
+# Portfolio Website
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+Welcome to my portfolio website! This project showcases my work and skills using various APIs, technologies, and programming languages. Here's an overview of what this website offers:
 
-## Deploy Your Own
+## Technologies Used
 
-Deploy your own Create React App project with Vercel.
+- Frontend: React, Styled-components, Recoil, Framer Motion
+- Backend: Node.js
+- Database: MongoDB
+- APIs: YouTube Data API, OpenAI API, News API, Weather API, Geometry API
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/create-react-app&template=create-react-app)
+## Features
 
-_Live Example: https://create-react-template.vercel.app/_
+### Card 1 - Weather Info
 
-## Available Scripts
+- Get current longitude and latitude, city information, and weather details using the Weather API.
+- Utilizes Framer Motion for interactive elements.
 
-In the project directory, you can run:
+### Card 2 - Music Recommender
 
-### `npm start`
+- Recommends music using the OpenAI API by analyzing user input.
+- Retrieves singer and song names and uses the YouTube Data API to get video data.
+- Allows users to play the recommended music.
 
-Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Card 3 - Headline News by Language
 
-The page will reload when you make changes. You may also see any lint errors in the console.
+- Displays top headlines from the News API.
+- Allows users to choose a language to view news in and shows a random headline from a selection of 20.
 
-### `npm test`
+### Card 4 - Background Music
 
-Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Plays background music using SoundCloud URLs.
+- Provides play and pause functionality with a custom interface.
 
-### `npm run build`
+### Card 5 - Guest Book
 
-Builds the app for production to the `build` folder.
+- Allows users to submit comments and save them to the backend using RESTful API endpoints.
+- Comment timestamps are displayed, and users can delete comments by entering a password.
 
-It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
+### Other Cards - Portfolio Showcase
+
+- Showcases my other projects with captured images and titles.
+- Clicking on a portfolio card enlarges it and centers it in the window.
+- Detailed project information is displayed, and clicking the dark background returns the card to its original position.
+
+## Getting Started
+
+1. Clone this repository.
+2. Install the required dependencies using npm or yarn.
+3. Run the project by executing `npm start` or `yarn start`.
+
+## Demo
+
+You can view the live demo of this project at [Your Portfolio Website URL](https://portfolio-ver2-chi.vercel.app/).
+
+## Contact
+
+If you have any questions or would like to collaborate, feel free to contact me at [deantube8078@gmail.com]
+
+Thank you for visiting my portfolio website! I hope you enjoy exploring my work.
