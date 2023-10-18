@@ -18,7 +18,7 @@ const projectData = {
     },
     projectURL: {
       live: "https://open-ai-vercel.vercel.app/openAI/chat",
-      github: "https://github.com/DeanYoon/openAI",
+      github: "https://github.com/DeanYoon/openAI-vercel",
     },
   },
   project2: {
