@@ -93,12 +93,8 @@ function CommentText({ comment, index, setDeletedIndex }) {
       return `${Math.floor(diff / (1000 * 60))}m`;
     } else if (diff < 1000 * 60 * 60 * 24) {
       return `${Math.floor(diff / (1000 * 60 * 60))}h`;
-    } else if (diff < 1000 * 60 * 60 * 24 * 30) {
-      return `${Math.floor(diff / (1000 * 60 * 60 * 24))}d`;
     } else {
-      const options = { year: "numeric", month: "2-digit", day: "2-digit" };
-      const formattedDate = new Date(date).toLocaleDateString("ko-KR", options);
-      return formattedDate;
+      return `${Math.floor(diff / (1000 * 60 * 60 * 24))}d`;
     }
   };
   const handleClick = () => {
